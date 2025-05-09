@@ -1,3 +1,5 @@
-*/__pycache__
-*/*/__pycache__
-env
+env/
+app/*/migrations/*
+app/*/__pycache__/*
+app/static/*
+app/files/*
