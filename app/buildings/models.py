@@ -54,8 +54,8 @@ class AgencesDeVoyagesFontPoint(models.Model):
     nom = models.CharField(max_length=100, blank=True, null=True)
     quartier = models.CharField(max_length=50, blank=True, null=True)
     arrondisse = models.CharField(max_length=30, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'agences_de_voyages_font_point'
@@ -65,7 +65,7 @@ class AmbassadesPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
     nom = models.CharField(max_length=59, blank=True, null=True)
     telephone = models.CharField(max_length=26, blank=True, null=True)
-    postale = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    postale = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     longitude = models.CharField(max_length=9, blank=True, null=True)
     latitude = models.CharField(max_length=9, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
@@ -151,8 +151,8 @@ class BacsFontPoint(models.Model):
     code = models.CharField(max_length=10, blank=True, null=True)
     position = models.CharField(max_length=25, blank=True, null=True)
     capacite = models.CharField(max_length=10, blank=True, null=True)
-    cordx = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    cordy = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    cordx = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    cordy = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'bacs_font_point'
@@ -163,8 +163,8 @@ class BacsPoint(models.Model):
     code = models.CharField(max_length=10, blank=True, null=True)
     position = models.CharField(max_length=25, blank=True, null=True)
     capacite = models.CharField(max_length=10, blank=True, null=True)
-    cordx = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    cordy = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    cordx = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    cordy = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'bacs_point'
@@ -178,8 +178,8 @@ class BanquesEtMicrofinancesCustomPoint(models.Model):
     type = models.CharField(max_length=20, blank=True, null=True)
     quartier = models.CharField(max_length=50, blank=True, null=True)
     arrondisse = models.CharField(max_length=50, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'banques_et_microfinances_custom_point'
@@ -336,9 +336,9 @@ class BatimentsYaoundeRegion(models.Model):
 class BouchesIncendiesYdeCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
     matricule = models.CharField(max_length=31, blank=True, null=True)
-    insertion = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    insertio0 = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    insertio1 = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    insertion = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    insertio0 = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    insertio1 = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     symbole = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
@@ -348,9 +348,9 @@ class BouchesIncendiesYdeCustomPoint(models.Model):
 class BouchesIncendiesYdePoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
     matricule = models.CharField(max_length=31, blank=True, null=True)
-    insertion = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    insertio0 = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    insertio1 = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    insertion = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    insertio0 = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    insertio1 = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     symbole = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
@@ -366,8 +366,8 @@ class BoulangeriesCustomPoint(models.Model):
     t_l_phone = models.BigIntegerField(db_column='t�l�phone', blank=True, null=True)  # Field renamed to remove unsuitable characters.
     postale = models.BigIntegerField(blank=True, null=True)
     propri_tai = models.CharField(db_column='propri�tai', max_length=50, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'boulangeries_custom_point'
@@ -382,8 +382,8 @@ class BoulangeriesRegion(models.Model):
     t_l_phone = models.BigIntegerField(db_column='t�l�phone', blank=True, null=True)  # Field renamed to remove unsuitable characters.
     postale = models.BigIntegerField(blank=True, null=True)
     propri_tai = models.CharField(db_column='propri�tai', max_length=50, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'boulangeries_region'
@@ -404,8 +404,8 @@ class CentreSpecialDetatCivilFontPoint(models.Model):
     nom = models.CharField(max_length=100, blank=True, null=True)
     quartier = models.CharField(max_length=50, blank=True, null=True)
     arrondisse = models.CharField(max_length=50, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'centre_special_detat_civil_font_point'
@@ -413,8 +413,8 @@ class CentreSpecialDetatCivilFontPoint(models.Model):
 
 class CentresCulturelsCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nom = models.CharField(max_length=49, blank=True, null=True)
     quartier = models.CharField(max_length=21, blank=True, null=True)
     promoteur = models.CharField(max_length=25, blank=True, null=True)
@@ -448,8 +448,8 @@ class CinemaCustomPoint(models.Model):
     offerts = models.CharField(max_length=100, blank=True, null=True)
     quartier = models.CharField(max_length=21, blank=True, null=True)
     commune = models.CharField(max_length=10, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'cinema_custom_point'
@@ -457,15 +457,15 @@ class CinemaCustomPoint(models.Model):
 
 class CitesMunicipalesCuyPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=24, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=16, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -489,8 +489,8 @@ class CommissariatsYdeFontPoint(models.Model):
 
 class ComplexesSportifsCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     noms = models.CharField(max_length=37, blank=True, null=True)
     type = models.CharField(max_length=7, blank=True, null=True)
     quartier = models.CharField(max_length=21, blank=True, null=True)
@@ -507,8 +507,8 @@ class ConsulatsPoint(models.Model):
     nom = models.CharField(max_length=100, blank=True, null=True)
     telephone = models.CharField(max_length=40, blank=True, null=True)
     postale = models.CharField(max_length=40, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
@@ -572,8 +572,8 @@ class EcolesMatPrimairePoint(models.Model):
     bp = models.CharField(max_length=10, blank=True, null=True)
     quartier = models.CharField(max_length=30, blank=True, null=True)
     arrondisse = models.CharField(max_length=30, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'ecoles_mat_primaire_point'
@@ -620,7 +620,7 @@ class EglisesProtestantesPoint(models.Model):
 
 class EnseignementDeBaseFontPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    numero = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    numero = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nom = models.CharField(max_length=60, blank=True, null=True)
     telephone = models.CharField(max_length=19, blank=True, null=True)
     bp = models.CharField(max_length=10, blank=True, null=True)
@@ -638,8 +638,8 @@ class EnseignementMaternelleCustomPoint(models.Model):
     postale = models.CharField(max_length=20, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
     arrondisse = models.CharField(max_length=30, blank=True, null=True)
-    cordx = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    cordy = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    cordx = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    cordy = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'enseignement_maternelle_custom_point'
@@ -652,8 +652,8 @@ class EnseignementMaternelleRegion(models.Model):
     postale = models.CharField(max_length=20, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
     arrondisse = models.CharField(max_length=30, blank=True, null=True)
-    cordx = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    cordy = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    cordx = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    cordy = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'enseignement_maternelle_region'
@@ -693,8 +693,8 @@ class EnseignementSuperieurCustomPoint(models.Model):
     fax = models.CharField(max_length=11, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
     arrondisse = models.CharField(max_length=20, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'enseignement_superieur_custom_point'
@@ -702,14 +702,14 @@ class EnseignementSuperieurCustomPoint(models.Model):
 
 class EnseignementsSecondairesFinalPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    numero = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    numero = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     etablissem = models.CharField(max_length=45, blank=True, null=True)
     localisati = models.CharField(max_length=34, blank=True, null=True)
     fondateur = models.CharField(max_length=31, blank=True, null=True)
     contact = models.CharField(max_length=35, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'enseignements_secondaires_final_point'
@@ -721,7 +721,7 @@ class EspaceVertEllipse(models.Model):
     espace = models.CharField(max_length=20, blank=True, null=True)
     denominati = models.CharField(max_length=50, blank=True, null=True)
     etat = models.CharField(max_length=20, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     commune = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -734,7 +734,7 @@ class EspaceVertRegion(models.Model):
     espace = models.CharField(max_length=20, blank=True, null=True)
     denominati = models.CharField(max_length=50, blank=True, null=True)
     etat = models.CharField(max_length=20, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     commune = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -745,7 +745,7 @@ class EspacesAmenagesRegion(models.Model):
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
     numeo_code = models.BigIntegerField(blank=True, null=True)
     lieu = models.CharField(max_length=30, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     creation = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -807,15 +807,15 @@ class GaragesCustomPoint(models.Model):
 
 class GareFerroviaireCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=39, blank=True, null=True)
     sup = models.CharField(max_length=1, blank=True, null=True)
     estim_e_field = models.CharField(db_column='estim�e__', max_length=1, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     actualisee = models.CharField(max_length=1, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=39, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -825,15 +825,15 @@ class GareFerroviaireCustomPoint(models.Model):
 
 class GaresRoutieresCuyPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=39, blank=True, null=True)
     sup = models.CharField(max_length=1, blank=True, null=True)
     estim_e_field = models.CharField(db_column='estim�e__', max_length=1, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     actualisee = models.CharField(max_length=1, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=39, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -843,7 +843,7 @@ class GaresRoutieresCuyPoint(models.Model):
 
 class GendarmeriesPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    numero = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    numero = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     d_nominati = models.CharField(db_column='d�nominati', max_length=80, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     bo_te_post = models.CharField(db_column='bo�te_post', max_length=12, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     num_ro_t_l = models.CharField(db_column='num�ro_t�l', max_length=12, blank=True, null=True)  # Field renamed to remove unsuitable characters.
@@ -888,8 +888,8 @@ class HotelsFontPoint(models.Model):
     golf = models.IntegerField(blank=True, null=True)
     standing = models.CharField(max_length=6, blank=True, null=True)
     tennis = models.IntegerField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'hotels_font_point'
@@ -897,14 +897,14 @@ class HotelsFontPoint(models.Model):
 
 class HussiersYdeCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    num_ro = models.DecimalField(db_column='num�ro', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    num_ro = models.DecimalField(db_column='num�ro', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     nom = models.CharField(max_length=28, blank=True, null=True)
     charge = models.CharField(max_length=6, blank=True, null=True)
     localisati = models.CharField(max_length=74, blank=True, null=True)
     t_l_phone = models.CharField(db_column='t�l�phone', max_length=50, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     quartier = models.CharField(max_length=20, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'hussiers_yde_custom_point'
@@ -970,7 +970,7 @@ class Layer(models.Model):
 class LeMfoundiPolyline(models.Model):
     geom = models.MultiLineStringField(srid=32632, blank=True, null=True)
     nom = models.CharField(max_length=32, blank=True, null=True)
-    longueur = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longueur = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     sens = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -979,8 +979,8 @@ class LeMfoundiPolyline(models.Model):
 
 class LieuxRemarquablesCustomPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     descriptio = models.CharField(max_length=14, blank=True, null=True)
     nom = models.CharField(max_length=42, blank=True, null=True)
 
@@ -990,8 +990,8 @@ class LieuxRemarquablesCustomPoint(models.Model):
 
 class LieuxRemarquablesFontPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     descriptio = models.CharField(max_length=14, blank=True, null=True)
     nom = models.CharField(max_length=42, blank=True, null=True)
 
@@ -1001,8 +1001,8 @@ class LieuxRemarquablesFontPoint(models.Model):
 
 class LieuxRemarquablesPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     descriptio = models.CharField(max_length=14, blank=True, null=True)
     nom = models.CharField(max_length=42, blank=True, null=True)
 
@@ -1024,7 +1024,7 @@ class LigneBusProjetPolyline(models.Model):
     num_ligne = models.CharField(max_length=10, blank=True, null=True)
     arret = models.BigIntegerField(blank=True, null=True)
     itineraire = models.CharField(max_length=254, blank=True, null=True)
-    lineaire = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    lineaire = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'ligne_bus_projet_polyline'
@@ -1064,7 +1064,7 @@ class LimiteYde(models.Model):
 class LimiteYde1Region(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
     commune = models.CharField(max_length=10, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'limite_yde1_region'
@@ -1073,10 +1073,10 @@ class LimiteYde1Region(models.Model):
 class LimitesDesCommunesYdeRegion(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
     commune = models.CharField(max_length=10, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    population = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    malades = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    pourcentag = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    population = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    malades = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    pourcentag = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'limites_des_communes_yde_region'
@@ -1084,8 +1084,8 @@ class LimitesDesCommunesYdeRegion(models.Model):
 
 class MairiesYaoundeCustomPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     numero = models.IntegerField(blank=True, null=True)
     nom = models.CharField(max_length=22, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
@@ -1096,7 +1096,7 @@ class MairiesYaoundeCustomPoint(models.Model):
 
 class MarcheEligedzoaRegion(models.Model):
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nommarche = models.CharField(max_length=20, blank=True, null=True)
     nbreboutiq = models.CharField(max_length=20, blank=True, null=True)
     nbrehangar = models.CharField(max_length=20, blank=True, null=True)
@@ -1108,7 +1108,7 @@ class MarcheEligedzoaRegion(models.Model):
 
 class MarcheEligedzoaZoneActiviteRegion(models.Model):
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nommarche = models.CharField(max_length=20, blank=True, null=True)
     nbreboutiq = models.CharField(max_length=20, blank=True, null=True)
     nbrehangar = models.CharField(max_length=20, blank=True, null=True)
@@ -1120,7 +1120,7 @@ class MarcheEligedzoaZoneActiviteRegion(models.Model):
 
 class MarcheMokoloRegion(models.Model):
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'marche_mokolo_region'
@@ -1128,15 +1128,15 @@ class MarcheMokoloRegion(models.Model):
 
 class MarchesCommunauxCuyPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=31, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=41, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -1150,13 +1150,13 @@ class MarchesCuyPoint(models.Model):
     designatio = models.CharField(max_length=20, blank=True, null=True)
     commune = models.CharField(max_length=20, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
-    superficie = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    age_util = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    cptoire = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    boutique = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    commer_ant = models.DecimalField(db_column='commer�ant', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    hangard = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    principale = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    superficie = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    age_util = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    cptoire = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    boutique = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    commer_ant = models.DecimalField(db_column='commer�ant', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    hangard = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    principale = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'marches_cuy_point'
@@ -1164,15 +1164,15 @@ class MarchesCuyPoint(models.Model):
 
 class MarchesPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=31, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=41, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -1182,15 +1182,15 @@ class MarchesPoint(models.Model):
 
 class MarchesRegion(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=31, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=41, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -1201,8 +1201,8 @@ class MarchesRegion(models.Model):
 class MinisteresYaoundeCustomPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
     numero = models.IntegerField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nom = models.CharField(max_length=72, blank=True, null=True)
     sigle = models.CharField(max_length=10, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
@@ -1267,9 +1267,9 @@ class NationsUniesPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
     nom = models.CharField(max_length=97, blank=True, null=True)
     telephone = models.CharField(max_length=25, blank=True, null=True)
-    postale = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    postale = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
@@ -1278,11 +1278,11 @@ class NationsUniesPoint(models.Model):
 
 class ParkingsCuy2007Polyline(models.Model):
     geom = models.MultiLineStringField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     libelle = models.CharField(max_length=25, blank=True, null=True)
-    rue = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    field_total = models.DecimalField(db_column='_total', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it started with '_'.
-    field_reserv_field = models.DecimalField(db_column='_reserv�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    rue = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    field_total = models.DecimalField(db_column='_total', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it started with '_'.
+    field_reserv_field = models.DecimalField(db_column='_reserv�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     pr_pt = models.CharField(max_length=10, blank=True, null=True)
     longueur = models.FloatField(blank=True, null=True)
     localisati = models.CharField(max_length=30, blank=True, null=True)
@@ -1297,10 +1297,10 @@ class ParkingsCuyPolyline(models.Model):
     localisati = models.CharField(max_length=30, blank=True, null=True)
     num_rue = models.CharField(max_length=8, blank=True, null=True)
     nature = models.CharField(max_length=25, blank=True, null=True)
-    parking = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    parking = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     offertes = models.BigIntegerField(blank=True, null=True)
     occup = models.BigIntegerField(blank=True, null=True)
-    longueur = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longueur = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'parkings_cuy_polyline'
@@ -1308,15 +1308,15 @@ class ParkingsCuyPolyline(models.Model):
 
 class PharmaciesPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    numero = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    numero = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     noms = models.CharField(max_length=100, blank=True, null=True)
     localisati = models.CharField(max_length=39, blank=True, null=True)
     pharmacien = models.CharField(max_length=57, blank=True, null=True)
     t_l_phone = models.CharField(db_column='t�l�phone', max_length=25, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     bo_te_post = models.CharField(db_column='bo�te_post', max_length=17, blank=True, null=True)  # Field renamed to remove unsuitable characters.
     quartier = models.CharField(max_length=20, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     arrondisse = models.CharField(max_length=15, blank=True, null=True)
     ouverture = models.CharField(max_length=20, blank=True, null=True)
 
@@ -1326,8 +1326,8 @@ class PharmaciesPoint(models.Model):
 
 class PrefecturesSousPrefecturesCustomPoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     numero = models.CharField(max_length=20, blank=True, null=True)
     nom = models.CharField(max_length=38, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
@@ -1424,7 +1424,7 @@ class QuartierRegion(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
     quartier = models.CharField(max_length=21, blank=True, null=True)
     arrondisse = models.CharField(max_length=30, blank=True, null=True)
-    secondaire = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    secondaire = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'quartier_region'
@@ -1441,13 +1441,13 @@ class QuartiersPoint(models.Model):
 
 class RadioYaoundeCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    long = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    lat = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    long = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    lat = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     nom = models.CharField(max_length=100, blank=True, null=True)
     frequence = models.CharField(max_length=15, blank=True, null=True)
     typologie = models.CharField(max_length=20, blank=True, null=True)
-    t_l_phone = models.DecimalField(db_column='t�l�phone', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    postale = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    t_l_phone = models.DecimalField(db_column='t�l�phone', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    postale = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     localisati = models.CharField(max_length=100, blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
     arrondisse = models.CharField(max_length=15, blank=True, null=True)
@@ -1509,7 +1509,7 @@ class RestaurantsYaoundeFontPoint(models.Model):
 class RivieresPolyline(models.Model):
     geom = models.MultiLineStringField(srid=32632, blank=True, null=True)
     nom = models.CharField(max_length=32, blank=True, null=True)
-    longueur = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longueur = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     sens = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -1519,7 +1519,7 @@ class RivieresPolyline(models.Model):
 class RivieresRegion(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
     nom = models.CharField(max_length=32, blank=True, null=True)
-    longueur = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longueur = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     sens = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
@@ -1530,7 +1530,7 @@ class RouteEnProjetPolyline(models.Model):
     geom = models.MultiLineStringField(blank=True, null=True)
     numero = models.CharField(max_length=10, blank=True, null=True)
     nom_rue = models.CharField(max_length=10, blank=True, null=True)
-    lineraire = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    lineraire = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'route_en_projet_polyline'
@@ -1570,13 +1570,13 @@ class ServicesCuyPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
     n_field = models.BigIntegerField(db_column='n_', blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=43, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=29, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -1591,8 +1591,8 @@ class StationsSevicesFontPoint(models.Model):
     telephonni = models.BigIntegerField(blank=True, null=True)
     quartier = models.CharField(max_length=20, blank=True, null=True)
     arrondisse = models.CharField(max_length=20, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'stations_sevices_font_point'
@@ -1609,8 +1609,8 @@ class SupZoneUrbaRegion(models.Model):
 
 class TerrainsDeSportsCustomPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    coord_x = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    coord_y = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    coord_x = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    coord_y = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     noms = models.CharField(max_length=37, blank=True, null=True)
     type = models.CharField(max_length=7, blank=True, null=True)
     standing = models.CharField(max_length=30, blank=True, null=True)
@@ -1624,15 +1624,15 @@ class TerrainsDeSportsCustomPoint(models.Model):
 
 class ToilettesPubliquesCuyPoint(models.Model):
     geom = models.PointField(srid=32632, blank=True, null=True)
-    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it ended with '_'.
+    n_field = models.DecimalField(db_column='n_', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it ended with '_'.
     designatio = models.CharField(max_length=23, blank=True, null=True)
-    sup = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
-    age_utile = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    actualisee = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=15, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    sup = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    estim_e_field = models.DecimalField(db_column='estim�e__', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
+    age_utile = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    actualisee = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    neuf_au_m_field = models.DecimalField(db_column='neuf_au_m�', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    actualis_e = models.DecimalField(db_column='actualis�e', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    field_field = models.DecimalField(db_column='___', max_digits=30, decimal_places=4, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it started with '_'. Field renamed because it ended with '_'.
     observatri = models.CharField(max_length=19, blank=True, null=True)
     quartier = models.CharField(max_length=40, blank=True, null=True)
 
@@ -1667,8 +1667,8 @@ class VoieFerreePolyline(models.Model):
 
 class VoiriesYaoundePoint(models.Model):
     geom = models.PointField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     voirie_field = models.IntegerField(db_column='voirie_', blank=True, null=True)  # Field renamed because it ended with '_'.
     length = models.FloatField(blank=True, null=True)
     tnode_field = models.IntegerField(db_column='tnode_', blank=True, null=True)  # Field renamed because it ended with '_'.
@@ -1683,8 +1683,8 @@ class VoiriesYaoundePoint(models.Model):
 
 class VoiriesYaoundePolyline(models.Model):
     geom = models.MultiLineStringField(blank=True, null=True)
-    longitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
     voirie_field = models.IntegerField(db_column='voirie_', blank=True, null=True)  # Field renamed because it ended with '_'.
     length = models.FloatField(blank=True, null=True)
     tnode_field = models.IntegerField(db_column='tnode_', blank=True, null=True)  # Field renamed because it ended with '_'.
@@ -1871,7 +1871,7 @@ class Z1C133CPolyline(models.Model):
 class ZoneAdressageRegion(models.Model):
     geom = models.MultiPolygonField(srid=32632, blank=True, null=True)
     nom_zone = models.CharField(max_length=20, blank=True, null=True)
-    super = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    super = models.DecimalField(max_digits=30, decimal_places=4, blank=True, null=True)
 
     class Meta:
         db_table = 'zone_adressage_region'
