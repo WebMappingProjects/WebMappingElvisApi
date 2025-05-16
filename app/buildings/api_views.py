@@ -1068,12 +1068,12 @@ class HotelsFontPointViewSet(viewsets.ModelViewSet):
     """
     queryset = HotelsFontPoint.objects.all()
     serializer_class = HotelsFontPointSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, InBBoxFilter, DistanceToPointFilter]
-    filterset_fields = ['quartier', 'commune']
-    search_fields = ['nom_h_tel', 'postale', 'telephone', 'quartier', 'commune', 'standing']
-    bbox_filter_field = 'geom'
-    distance_filter_field = 'geom'
-    bbox_filter_include_overlapping = True
+    # filter_backends = [DjangoFilterBackend, filters.SearchFilter, InBBoxFilter, DistanceToPointFilter]
+    # filterset_fields = ['quartier', 'commune']
+    # search_fields = ['nom_h_tel', 'postale', 'telephone', 'quartier', 'commune', 'standing']
+    # bbox_filter_field = 'geom'
+    # distance_filter_field = 'geom'
+    # bbox_filter_include_overlapping = True
 
 class HussiersYdeCustomPointViewSet(viewsets.ModelViewSet):
     """
