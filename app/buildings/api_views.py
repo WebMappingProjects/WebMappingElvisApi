@@ -1,6 +1,7 @@
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis.filters import InBBoxFilter, DistanceToPointFilter
+from accounts.permissions import *
 from .models import (
     AfricaRegion,
     AgencesDeVoyagesFontPoint,
@@ -283,6 +284,7 @@ class AfricaRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['country', 'capital', 'continent', 'fips', 'iso_2', 'iso_3']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class AgencesDeVoyagesFontPointViewSet(viewsets.ModelViewSet):
@@ -296,6 +298,7 @@ class AgencesDeVoyagesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class AmbassadesPointViewSet(viewsets.ModelViewSet):
@@ -309,6 +312,7 @@ class AmbassadesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'longitude', 'latitude', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ArmeeFontPointViewSet(viewsets.ModelViewSet):
@@ -322,6 +326,7 @@ class ArmeeFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'type', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ArrondAireMetropViewSet(viewsets.ModelViewSet):
@@ -335,6 +340,7 @@ class ArrondAireMetropViewSet(viewsets.ModelViewSet):
     search_fields = ['province', 'departemen', 'codedepart', 'arrond', 'codearrond', 'arr_minatd', 'cir_ad', 'resultat', 'responsabl']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class AubergesCustomPointViewSet(viewsets.ModelViewSet):
@@ -348,6 +354,7 @@ class AubergesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class AxesVoiriesPolylineViewSet(viewsets.ModelViewSet):
@@ -361,6 +368,7 @@ class AxesVoiriesPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['hierarchie', 'nomrue', 'type_axe', 'etat']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BacsFontPointViewSet(viewsets.ModelViewSet):
@@ -374,6 +382,7 @@ class BacsFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['code', 'position', 'capacite']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BacsPointViewSet(viewsets.ModelViewSet):
@@ -387,6 +396,7 @@ class BacsPointViewSet(viewsets.ModelViewSet):
     search_fields = ['code', 'position', 'capacite']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BanquesEtMicrofinancesCustomPointViewSet(viewsets.ModelViewSet):
@@ -400,6 +410,7 @@ class BanquesEtMicrofinancesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'type', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BassinVersantMfoundiBasRegionViewSet(viewsets.ModelViewSet):
@@ -413,6 +424,7 @@ class BassinVersantMfoundiBasRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['n_bv', 'cours_bv']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BassinVersantMfoundiRegionViewSet(viewsets.ModelViewSet):
@@ -426,6 +438,7 @@ class BassinVersantMfoundiRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nom_bassin']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BassinVersantNoneViewSet(viewsets.ModelViewSet):
@@ -436,6 +449,8 @@ class BassinVersantNoneViewSet(viewsets.ModelViewSet):
     serializer_class = BassinVersantNoneSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = []
+    permission_classes = [TechnicienOrReadOnly]
+
     search_fields = ['n_bv', 'cours_bv']
 
 class BassinVersantRegionViewSet(viewsets.ModelViewSet):
@@ -449,6 +464,7 @@ class BassinVersantRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['n_bv', 'cours_bv']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatiDurPolylineViewSet(viewsets.ModelViewSet):
@@ -462,6 +478,7 @@ class BatiDurPolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatiLocauxPolylineViewSet(viewsets.ModelViewSet):
@@ -475,6 +492,7 @@ class BatiLocauxPolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatiPublicsPointViewSet(viewsets.ModelViewSet):
@@ -488,6 +506,7 @@ class BatiPublicsPointViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatiPublicsRegionViewSet(viewsets.ModelViewSet):
@@ -501,6 +520,7 @@ class BatiPublicsRegionViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatimentsYaoundePointViewSet(viewsets.ModelViewSet):
@@ -514,6 +534,7 @@ class BatimentsYaoundePointViewSet(viewsets.ModelViewSet):
     search_fields = ['quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatimentsYaoundePolylineViewSet(viewsets.ModelViewSet):
@@ -527,6 +548,7 @@ class BatimentsYaoundePolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BatimentsYaoundeRegionViewSet(viewsets.ModelViewSet):
@@ -540,6 +562,7 @@ class BatimentsYaoundeRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BouchesIncendiesYdeCustomPointViewSet(viewsets.ModelViewSet):
@@ -553,6 +576,7 @@ class BouchesIncendiesYdeCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['matricule', 'symbole']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BouchesIncendiesYdePointViewSet(viewsets.ModelViewSet):
@@ -566,6 +590,7 @@ class BouchesIncendiesYdePointViewSet(viewsets.ModelViewSet):
     search_fields = ['matricule', 'symbole']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BoulangeriesCustomPointViewSet(viewsets.ModelViewSet):
@@ -579,6 +604,7 @@ class BoulangeriesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse', 'standing', 'propri_tai']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class BoulangeriesRegionViewSet(viewsets.ModelViewSet):
@@ -592,6 +618,7 @@ class BoulangeriesRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse', 'standing', 'propri_tai']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CampSicCustomPointViewSet(viewsets.ModelViewSet):
@@ -605,6 +632,7 @@ class CampSicCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CentreSpecialDetatCivilFontPointViewSet(viewsets.ModelViewSet):
@@ -618,6 +646,7 @@ class CentreSpecialDetatCivilFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CentresCulturelsCustomPointViewSet(viewsets.ModelViewSet):
@@ -631,6 +660,7 @@ class CentresCulturelsCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'promoteur', 'e_mail', 'offerts', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CimetiereRegionViewSet(viewsets.ModelViewSet):
@@ -644,6 +674,7 @@ class CimetiereRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['cimeti_re', 'localisati', 'arrondiss']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CinemaCustomPointViewSet(viewsets.ModelViewSet):
@@ -657,6 +688,7 @@ class CinemaCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'promoteur', 'e_mail', 'offerts', 'quartier', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CitesMunicipalesCuyPointViewSet(viewsets.ModelViewSet):
@@ -670,6 +702,7 @@ class CitesMunicipalesCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class CommissariatsYdeFontPointViewSet(viewsets.ModelViewSet):
@@ -683,6 +716,7 @@ class CommissariatsYdeFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'localisati', 'contact', 'commissari', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ComplexesSportifsCustomPointViewSet(viewsets.ModelViewSet):
@@ -696,6 +730,7 @@ class ComplexesSportifsCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['noms', 'type', 'quartier', 'discipline', 'commune', 'standing']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ConsulatsPointViewSet(viewsets.ModelViewSet):
@@ -709,6 +744,7 @@ class ConsulatsPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'postale', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class DelegationsCustomPointViewSet(viewsets.ModelViewSet):
@@ -722,6 +758,7 @@ class DelegationsCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class DepAireMetropViewSet(viewsets.ModelViewSet):
@@ -735,6 +772,7 @@ class DepAireMetropViewSet(viewsets.ModelViewSet):
     search_fields = ['minatd', 'code_prov', 'departemen', 'départemen', 'province', 'chef_lieu']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EcoleNormaleDesInstituteursDenseignementGeneralPointViewSet(viewsets.ModelViewSet):
@@ -748,6 +786,7 @@ class EcoleNormaleDesInstituteursDenseignementGeneralPointViewSet(viewsets.Model
     search_fields = ['numero', 'nom', 'localisati', 'contact', 'telephone', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EcolesMatPrimairePointViewSet(viewsets.ModelViewSet):
@@ -761,6 +800,7 @@ class EcolesMatPrimairePointViewSet(viewsets.ModelViewSet):
     search_fields = ['code_ecole', 'nom', 'telephone', 'bp', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EglisesCatholiquesFontPointViewSet(viewsets.ModelViewSet):
@@ -774,6 +814,7 @@ class EglisesCatholiquesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'postale', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EglisesPresbyteriennesFontPointViewSet(viewsets.ModelViewSet):
@@ -787,6 +828,7 @@ class EglisesPresbyteriennesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'postale', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EglisesProtestantesPointViewSet(viewsets.ModelViewSet):
@@ -800,6 +842,7 @@ class EglisesProtestantesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephonne', 'postale', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementDeBaseFontPointViewSet(viewsets.ModelViewSet):
@@ -813,6 +856,7 @@ class EnseignementDeBaseFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'bp', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementMaternelleCustomPointViewSet(viewsets.ModelViewSet):
@@ -826,6 +870,7 @@ class EnseignementMaternelleCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['ecoles', 'telephone', 'postale', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementMaternelleRegionViewSet(viewsets.ModelViewSet):
@@ -839,6 +884,7 @@ class EnseignementMaternelleRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['ecoles', 'telephone', 'postale', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementPrimaireFontPointViewSet(viewsets.ModelViewSet):
@@ -852,6 +898,7 @@ class EnseignementPrimaireFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['numero', 'publics', 'quartier0', 'tel_phone', 'bp', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementPrimaireRegionViewSet(viewsets.ModelViewSet):
@@ -865,6 +912,7 @@ class EnseignementPrimaireRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['numero', 'publics', 'quartier0', 'tel_phone', 'bp', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementSuperieurCustomPointViewSet(viewsets.ModelViewSet):
@@ -878,6 +926,7 @@ class EnseignementSuperieurCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'contact', 'telephone', 'fax', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EnseignementsSecondairesFinalPointViewSet(viewsets.ModelViewSet):
@@ -891,6 +940,7 @@ class EnseignementsSecondairesFinalPointViewSet(viewsets.ModelViewSet):
     search_fields = ['etablissem', 'localisati', 'fondateur', 'contact', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EspaceVertEllipseViewSet(viewsets.ModelViewSet):
@@ -904,6 +954,7 @@ class EspaceVertEllipseViewSet(viewsets.ModelViewSet):
     search_fields = ['code', 'espace', 'denominati', 'etat', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EspaceVertRegionViewSet(viewsets.ModelViewSet):
@@ -917,6 +968,7 @@ class EspaceVertRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['code', 'espace', 'denominati', 'etat', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EspacesAmenagesRegionViewSet(viewsets.ModelViewSet):
@@ -930,6 +982,7 @@ class EspacesAmenagesRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['lieu', 'creation']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class EtalonnagePolylineViewSet(viewsets.ModelViewSet):
@@ -943,6 +996,7 @@ class EtalonnagePolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class FeuTricoloreCustomPointViewSet(viewsets.ModelViewSet):
@@ -956,6 +1010,7 @@ class FeuTricoloreCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['non']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class FeuTricoloreEllipseViewSet(viewsets.ModelViewSet):
@@ -969,6 +1024,7 @@ class FeuTricoloreEllipseViewSet(viewsets.ModelViewSet):
     search_fields = ['non']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class FeuTricolorePolylineViewSet(viewsets.ModelViewSet):
@@ -982,6 +1038,7 @@ class FeuTricolorePolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['non']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class FeuTricoloreRegionViewSet(viewsets.ModelViewSet):
@@ -995,6 +1052,7 @@ class FeuTricoloreRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['non']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class GaragesCustomPointViewSet(viewsets.ModelViewSet):
@@ -1008,6 +1066,7 @@ class GaragesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 't_l_phone', 'postale', 'quartier', 'standing']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class GareFerroviaireCustomPointViewSet(viewsets.ModelViewSet):
@@ -1021,6 +1080,7 @@ class GareFerroviaireCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'sup', 'actualisee', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class GaresRoutieresCuyPointViewSet(viewsets.ModelViewSet):
@@ -1034,6 +1094,7 @@ class GaresRoutieresCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'sup', 'actualisee', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class GendarmeriesPointViewSet(viewsets.ModelViewSet):
@@ -1047,6 +1108,7 @@ class GendarmeriesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['d_nominati', 'bo_te_post', 'num_ro_t_l', 'sp_cialisa', 'localisati']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class HangarsPolylineViewSet(viewsets.ModelViewSet):
@@ -1060,6 +1122,7 @@ class HangarsPolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class HotelsFontPointViewSet(viewsets.ModelViewSet):
@@ -1073,6 +1136,7 @@ class HotelsFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom_h_tel', 'postale', 'telephone', 'quartier', 'commune', 'standing']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class HussiersYdeCustomPointViewSet(viewsets.ModelViewSet):
@@ -1086,6 +1150,7 @@ class HussiersYdeCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'charge', 'localisati', 't_l_phone', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ItinerairePrcPolylineViewSet(viewsets.ModelViewSet):
@@ -1099,6 +1164,7 @@ class ItinerairePrcPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['it', 'lineaire', 'etat']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LacHorsCartoRegionViewSet(viewsets.ModelViewSet):
@@ -1112,6 +1178,7 @@ class LacHorsCartoRegionViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LacRegionViewSet(viewsets.ModelViewSet):
@@ -1125,6 +1192,7 @@ class LacRegionViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LaveriesFontPointViewSet(viewsets.ModelViewSet):
@@ -1138,6 +1206,7 @@ class LaveriesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'standing']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LayerViewSet(viewsets.ModelViewSet):
@@ -1148,6 +1217,8 @@ class LayerViewSet(viewsets.ModelViewSet):
     serializer_class = LayerSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = []
+    permission_classes = [TechnicienOrReadOnly]
+
     search_fields = ['schema_name', 'table_name', 'feature_column']
 
 class LeMfoundiPolylineViewSet(viewsets.ModelViewSet):
@@ -1161,6 +1232,7 @@ class LeMfoundiPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'sens']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LieuxRemarquablesCustomPointViewSet(viewsets.ModelViewSet):
@@ -1174,6 +1246,7 @@ class LieuxRemarquablesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['descriptio', 'nom']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LieuxRemarquablesFontPointViewSet(viewsets.ModelViewSet):
@@ -1187,6 +1260,7 @@ class LieuxRemarquablesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['descriptio', 'nom']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LieuxRemarquablesPointViewSet(viewsets.ModelViewSet):
@@ -1200,6 +1274,7 @@ class LieuxRemarquablesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['descriptio', 'nom']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LigneBusPolylineViewSet(viewsets.ModelViewSet):
@@ -1213,6 +1288,7 @@ class LigneBusPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['lineaire', 'designatio']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LigneBusProjetPolylineViewSet(viewsets.ModelViewSet):
@@ -1226,6 +1302,7 @@ class LigneBusProjetPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['num_ligne', 'itineraire']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LimiteMokoloPolylineViewSet(viewsets.ModelViewSet):
@@ -1239,6 +1316,7 @@ class LimiteMokoloPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['sup']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LimiteYdeViewSet(viewsets.ModelViewSet):
@@ -1252,6 +1330,7 @@ class LimiteYdeViewSet(viewsets.ModelViewSet):
     search_fields = ['minatd', 'code_prov', 'departemen', 'départemen', 'province', 'chef_lieu']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LimiteYde1RegionViewSet(viewsets.ModelViewSet):
@@ -1265,6 +1344,7 @@ class LimiteYde1RegionViewSet(viewsets.ModelViewSet):
     search_fields = ['commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class LimitesDesCommunesYdeRegionViewSet(viewsets.ModelViewSet):
@@ -1278,6 +1358,7 @@ class LimitesDesCommunesYdeRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MairiesYaoundeCustomPointViewSet(viewsets.ModelViewSet):
@@ -1291,6 +1372,7 @@ class MairiesYaoundeCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarcheEligedzoaRegionViewSet(viewsets.ModelViewSet):
@@ -1304,6 +1386,7 @@ class MarcheEligedzoaRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nommarche', 'nbreboutiq', 'nbrehangar', 'pricipalea']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarcheEligedzoaZoneActiviteRegionViewSet(viewsets.ModelViewSet):
@@ -1317,6 +1400,7 @@ class MarcheEligedzoaZoneActiviteRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nommarche', 'nbreboutiq', 'nbrehangar', 'pricipalea']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarcheMokoloRegionViewSet(viewsets.ModelViewSet):
@@ -1330,6 +1414,7 @@ class MarcheMokoloRegionViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarchesCommunauxCuyPointViewSet(viewsets.ModelViewSet):
@@ -1343,6 +1428,7 @@ class MarchesCommunauxCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarchesCuyPointViewSet(viewsets.ModelViewSet):
@@ -1356,6 +1442,7 @@ class MarchesCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'commune', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarchesPointViewSet(viewsets.ModelViewSet):
@@ -1369,6 +1456,7 @@ class MarchesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MarchesRegionViewSet(viewsets.ModelViewSet):
@@ -1382,6 +1470,7 @@ class MarchesRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MinisteresYaoundeCustomPointViewSet(viewsets.ModelViewSet):
@@ -1395,6 +1484,7 @@ class MinisteresYaoundeCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'sigle', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MonumentsEllipseViewSet(viewsets.ModelViewSet):
@@ -1408,6 +1498,7 @@ class MonumentsEllipseViewSet(viewsets.ModelViewSet):
     search_fields = ['monument', 'position', 'creation', 'significat']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MonumentsRegionViewSet(viewsets.ModelViewSet):
@@ -1421,6 +1512,7 @@ class MonumentsRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['monument', 'position', 'creation', 'significat']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MosqueesFontPointViewSet(viewsets.ModelViewSet):
@@ -1434,6 +1526,7 @@ class MosqueesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class MursPolylineViewSet(viewsets.ModelViewSet):
@@ -1447,6 +1540,7 @@ class MursPolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class NationsUniesPointViewSet(viewsets.ModelViewSet):
@@ -1460,6 +1554,7 @@ class NationsUniesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ParkingsCuy2007PolylineViewSet(viewsets.ModelViewSet):
@@ -1473,6 +1568,7 @@ class ParkingsCuy2007PolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['libelle', 'pr_pt', 'localisati', 'observatio']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ParkingsCuyPolylineViewSet(viewsets.ModelViewSet):
@@ -1486,6 +1582,7 @@ class ParkingsCuyPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['localisati', 'num_rue', 'nature']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class PharmaciesPointViewSet(viewsets.ModelViewSet):
@@ -1499,6 +1596,7 @@ class PharmaciesPointViewSet(viewsets.ModelViewSet):
     search_fields = ['noms', 'localisati', 'pharmacien', 't_l_phone', 'bo_te_post', 'quartier', 'arrondisse', 'ouverture']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class PrefecturesSousPrefecturesCustomPointViewSet(viewsets.ModelViewSet):
@@ -1512,6 +1610,7 @@ class PrefecturesSousPrefecturesCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['numero', 'nom', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ProjetsRouteEllipseViewSet(viewsets.ModelViewSet):
@@ -1525,6 +1624,7 @@ class ProjetsRouteEllipseViewSet(viewsets.ModelViewSet):
     search_fields = ['lineaire']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ProjetsRoutePolylineViewSet(viewsets.ModelViewSet):
@@ -1538,6 +1638,7 @@ class ProjetsRoutePolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['lineaire']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class QuadrillageNoneViewSet(viewsets.ModelViewSet):
@@ -1548,6 +1649,8 @@ class QuadrillageNoneViewSet(viewsets.ModelViewSet):
     serializer_class = QuadrillageNoneSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = []
+    permission_classes = [TechnicienOrReadOnly]
+
     search_fields = ['recule', 'alignement', 'obli_archi', 'cloture', 'interdits', 'voirie']
 
 class QuadrillagePointViewSet(viewsets.ModelViewSet):
@@ -1561,6 +1664,7 @@ class QuadrillagePointViewSet(viewsets.ModelViewSet):
     search_fields = ['recule', 'alignement', 'obli_archi', 'cloture', 'interdits', 'voirie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class QuadrillageRegionViewSet(viewsets.ModelViewSet):
@@ -1574,6 +1678,7 @@ class QuadrillageRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['recule', 'alignement', 'obli_archi', 'cloture', 'interdits', 'voirie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class QuartierRegionViewSet(viewsets.ModelViewSet):
@@ -1587,6 +1692,7 @@ class QuartierRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class QuartiersPointViewSet(viewsets.ModelViewSet):
@@ -1600,6 +1706,7 @@ class QuartiersPointViewSet(viewsets.ModelViewSet):
     search_fields = ['texte', 'equipement']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class RadioYaoundeCustomPointViewSet(viewsets.ModelViewSet):
@@ -1613,6 +1720,7 @@ class RadioYaoundeCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'frequence', 'typologie', 'localisati', 'quartier', 'arrondisse', 'statut']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ReligionsYaoundeFontPointViewSet(viewsets.ModelViewSet):
@@ -1626,6 +1734,7 @@ class ReligionsYaoundeFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'postale', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ReligionsYaoundePointViewSet(viewsets.ModelViewSet):
@@ -1639,6 +1748,7 @@ class ReligionsYaoundePointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'telephone', 'postale', 'quartier', 'religion', 'categorie']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ReseauEpPolylineViewSet(viewsets.ModelViewSet):
@@ -1652,6 +1762,7 @@ class ReseauEpPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['ep']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class RestaurantsYaoundeFontPointViewSet(viewsets.ModelViewSet):
@@ -1665,6 +1776,7 @@ class RestaurantsYaoundeFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 't_lephone', 'quartier', 'standing', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class RivieresPolylineViewSet(viewsets.ModelViewSet):
@@ -1678,6 +1790,7 @@ class RivieresPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'sens']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class RivieresRegionViewSet(viewsets.ModelViewSet):
@@ -1691,6 +1804,7 @@ class RivieresRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'sens']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class RouteEnProjetPolylineViewSet(viewsets.ModelViewSet):
@@ -1704,6 +1818,7 @@ class RouteEnProjetPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['numero', 'nom_rue']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class SanitaireYaoundePointViewSet(viewsets.ModelViewSet):
@@ -1717,6 +1832,7 @@ class SanitaireYaoundePointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'statut', 'categorie', 'promoteur', 't_lephone', 'postale', 'de_sante0', 'district', 'commune', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class SapeursPompierPointViewSet(viewsets.ModelViewSet):
@@ -1730,6 +1846,7 @@ class SapeursPompierPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ServicesCuyPointViewSet(viewsets.ModelViewSet):
@@ -1743,6 +1860,7 @@ class ServicesCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class StationsSevicesFontPointViewSet(viewsets.ModelViewSet):
@@ -1756,6 +1874,7 @@ class StationsSevicesFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['nom', 'quartier', 'arrondisse']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class SupZoneUrbaRegionViewSet(viewsets.ModelViewSet):
@@ -1769,6 +1888,7 @@ class SupZoneUrbaRegionViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class TerrainsDeSportsCustomPointViewSet(viewsets.ModelViewSet):
@@ -1782,6 +1902,7 @@ class TerrainsDeSportsCustomPointViewSet(viewsets.ModelViewSet):
     search_fields = ['noms', 'type', 'standing', 'quartier', 'discipline', 'commune']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ToilettesPubliquesCuyPointViewSet(viewsets.ModelViewSet):
@@ -1795,6 +1916,7 @@ class ToilettesPubliquesCuyPointViewSet(viewsets.ModelViewSet):
     search_fields = ['designatio', 'observatri', 'quartier']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class TopologyViewSet(viewsets.ModelViewSet):
@@ -1805,6 +1927,8 @@ class TopologyViewSet(viewsets.ModelViewSet):
     serializer_class = TopologySerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['name']
+    permission_classes = [TechnicienOrReadOnly]
+
     search_fields = ['name']
 
 class VoieFerreePolylineViewSet(viewsets.ModelViewSet):
@@ -1818,6 +1942,7 @@ class VoieFerreePolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class VoiriesYaoundePointViewSet(viewsets.ModelViewSet):
@@ -1831,6 +1956,7 @@ class VoiriesYaoundePointViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class VoiriesYaoundePolylineViewSet(viewsets.ModelViewSet):
@@ -1844,6 +1970,7 @@ class VoiriesYaoundePolylineViewSet(viewsets.ModelViewSet):
     search_fields = []
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class WorldFontPointViewSet(viewsets.ModelViewSet):
@@ -1857,6 +1984,7 @@ class WorldFontPointViewSet(viewsets.ModelViewSet):
     search_fields = ['country', 'capital', 'continent', 'fips', 'iso_2', 'iso_3']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class WorldPolylineViewSet(viewsets.ModelViewSet):
@@ -1870,6 +1998,7 @@ class WorldPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['country', 'capital', 'continent', 'fips', 'iso_2', 'iso_3']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class WorldRegionViewSet(viewsets.ModelViewSet):
@@ -1883,6 +2012,7 @@ class WorldRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['country', 'capital', 'continent', 'fips', 'iso_2', 'iso_3']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C121CPolylineViewSet(viewsets.ModelViewSet):
@@ -1896,6 +2026,7 @@ class Z1C121CPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone1', 'number_2_1_c']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C122CPointViewSet(viewsets.ModelViewSet):
@@ -1909,6 +2040,7 @@ class Z1C122CPointViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C122CPolylineViewSet(viewsets.ModelViewSet):
@@ -1922,6 +2054,7 @@ class Z1C122CPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C131CPolylineViewSet(viewsets.ModelViewSet):
@@ -1935,6 +2068,7 @@ class Z1C131CPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C132CPolylineViewSet(viewsets.ModelViewSet):
@@ -1948,6 +2082,7 @@ class Z1C132CPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class Z1C133CPolylineViewSet(viewsets.ModelViewSet):
@@ -1961,6 +2096,7 @@ class Z1C133CPolylineViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'circuit']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ZoneAdressageRegionViewSet(viewsets.ModelViewSet):
@@ -1974,6 +2110,7 @@ class ZoneAdressageRegionViewSet(viewsets.ModelViewSet):
     search_fields = ['nom_zone']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 class ZonesProscritesEllipseViewSet(viewsets.ModelViewSet):
@@ -1987,5 +2124,6 @@ class ZonesProscritesEllipseViewSet(viewsets.ModelViewSet):
     search_fields = ['zone', 'itineraire']
     bbox_filter_field = 'geom'
     distance_filter_field = 'geom'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
