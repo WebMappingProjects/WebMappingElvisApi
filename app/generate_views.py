@@ -46,6 +46,7 @@ for model in models_list:
 api_views_content = """from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis.filters import InBBoxFilter, DistanceToPointFilter
+from accounts.permissions import *
 from .models import (\n    """
 
 api_views_content += ",\n    ".join(model.__name__ for model in models_list)
@@ -91,6 +92,7 @@ for model in models_list:
     search_fields = [{search_fields_str}]
     bbox_filter_field = '{geo_field}'
     distance_filter_field = '{geo_field}'
+    permission_classes = [TechnicienOrReadOnly]
     bbox_filter_include_overlapping = True
 
 """
@@ -103,6 +105,8 @@ for model in models_list:
     serializer_class = {model.__name__}Serializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = [{filter_fields_str}]
+    permission_classes = [TechnicienOrReadOnly]
+
     search_fields = [{search_fields_str}]
 
 """
@@ -110,6 +114,12 @@ for model in models_list:
 # Generate urls.py content
 urls_content = """from django.urls import include, path
 from rest_framework import routers
+from .views import (
+    ServiceStatisticsView,
+    GroupedDataView,
+    AverageDistanceView,
+    NearestServiceView
+)
 from .api_views import (\n    """
 
 urls_content += "ViewSet,\n    ".join(model.__name__ for model in models_list)
@@ -134,6 +144,7 @@ for model in models_list:
 urls_content += """\nurlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
 ]
 """
 

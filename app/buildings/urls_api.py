@@ -1,12 +1,5 @@
+from django.urls import include, path
 from rest_framework import routers
-from django.urls import path
-from buildings.views import (
-    ServiceStatisticsView,
-    GroupedDataView,
-    AverageDistanceView,
-    NearestServiceView
-)
-
 from .api_views import (
     AfricaRegionViewSet,
     AgencesDeVoyagesFontPointViewSet,
@@ -143,7 +136,6 @@ from .api_views import (
     ZonesProscritesEllipseViewSet
 )
 
-app_name = "buildings"
 router = routers.DefaultRouter()
 router.register(r'africa', AfricaRegionViewSet)
 router.register(r'agences-de-voyages-font', AgencesDeVoyagesFontPointViewSet)
@@ -279,12 +271,7 @@ router.register(r'z1-c133-cpolyline', Z1C133CPolylineViewSet)
 router.register(r'zone-adressage', ZoneAdressageRegionViewSet)
 router.register(r'zones-proscrites-ellipse', ZonesProscritesEllipseViewSet)
 
-
-urlpatterns = router.urls
-
-urlpatterns += [
-    path('count/', ServiceStatisticsView.as_view(), name='service-statistics'),
-    path('group/', GroupedDataView.as_view(), name='grouped-data'),
-    path('distance/', AverageDistanceView.as_view(), name='average-distance'),
-    path('nearest/', NearestServiceView.as_view(), name='nearest-service'),
+urlpatterns = [
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
