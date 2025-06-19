@@ -101,7 +101,7 @@ class ServiceStatisticsView(views.APIView):
         
         for service_name, model_name in service_models.items():
             try:
-                model = apps.get_model('api', model_name)
+                model = apps.get_model('buildings', model_name)
                 count = model.objects.count()
                 statistics_data[service_name] = count
             except:
@@ -132,7 +132,7 @@ class GroupedDataView(views.APIView):
             }, status=400)
         
         try:
-            model = apps.get_model('api', model_name)
+            model = apps.get_model('buildings', model_name)
             
             # Vérifier si le champ existe
             if not hasattr(model, group_by):
@@ -177,7 +177,7 @@ class AverageDistanceView(views.APIView):
             }, status=400)
         
         try:
-            model = apps.get_model('api', model_name)
+            model = apps.get_model('buildings', model_name)
             
             # Vérifier si le modèle a un champ géométrique
             if not hasattr(model, 'geom'):
@@ -186,8 +186,10 @@ class AverageDistanceView(views.APIView):
                 }, status=400)
             
             # Récupérer les points avec géométrie valide
-            points = model.objects.filter(geom__isnull=False).exclude(geom__exact='')[:limit]
+            # points = model.objects.filter(geom__isnull=False).exclude(geom__exact='')[:limit]
+            points = model.objects.filter(geom__isnull=False)[:limit]
             
+            print(f'Nombre de points récupérés: {points.count()}')
             if points.count() < 2:
                 return Response({
                     'error': 'Pas assez de points pour calculer une distance moyenne'
@@ -227,6 +229,7 @@ class AverageDistanceView(views.APIView):
                 'distance_mediane_metres': round(median_distance, 2),
                 'message': f'En moyenne, il faut parcourir {round(avg_distance, 2)} mètres pour trouver un autre {model_name}'
             })
+
             
         except LookupError:
             return Response({
