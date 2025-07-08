@@ -50,7 +50,7 @@ services:
       - ./database.env
     
     healthcheck:
-        test: ["CMD-SHELL", "PGPASSWORD=postgres pg_isready -U elvis -d SIG_GEOSPATIAL_DB -h localhost"]
+        test: ["CMD-SHELL", "PGPASSWORD=postgres pg_isready -U elvis -d SIG_GEOSPATIAL_DB_1 -h localhost"]
         interval: 10s
         timeout: 5s
         retries: 10

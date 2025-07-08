@@ -22,7 +22,7 @@ DB_PORT= os.getenv('DB_PORT',5432)
 DB_HOST = os.getenv('DB_HOST','db')
 REDIS_HOST = os.getenv('REDIS_HOST','redis')
 REDIS_PORT = os.getenv('REDIS_PORT',6379)
-DB_NAME = os.getenv('DB_NAME','SIG_GEOSPATIAL_DB')
+DB_NAME = os.getenv('DB_NAME','SIG_GEOSPATIAL_DB_1')
 DB_USER = os.getenv('DB_USER','elvis')
 DB_PASSWORD = os.getenv('DB_PASSWORD','postgres')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

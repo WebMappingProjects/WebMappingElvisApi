@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "SIG_GEOSPATIAL_DB" ]
+if [ "$DATABASE" = "SIG_GEOSPATIAL_DB_1" ]
 then
     echo "Waiting for postgres..."
 
@@ -25,9 +25,9 @@ echo "================= migrate ====================================="
 echo "================ accounts ====================================="
 python manage.py migrate accounts 
 echo "================ buildings ====================================="
-python manage.py migrate buildings --check
+python manage.py migrate buildings 
 echo "==============================================================="
-python manage.py migrate --check
+python manage.py migrate 
 echo "done ."
 # echo "==============================================================="
 echo "================= collect static files ========================"
