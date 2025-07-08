@@ -37,13 +37,16 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ["id","username","email",
-                  "password", "is_superuser"]
+                  "password", "is_superuser", "role"]
         
         extra_kwargs = {
             "password": {
                 "write_only": True
             },
             "is_superuser" : {
+                "read_only": True
+            },
+            "role" : {
                 "read_only": True
             }
         }

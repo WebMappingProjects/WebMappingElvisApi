@@ -101,7 +101,7 @@ class ServiceStatisticsView(views.APIView):
         
         for service_name, model_name in service_models.items():
             try:
-                model = apps.get_model('api', model_name)
+                model = apps.get_model('buildings', model_name)
                 count = model.objects.count()
                 statistics_data[service_name] = count
             except:
@@ -132,7 +132,7 @@ class GroupedDataView(views.APIView):
             }, status=400)
         
         try:
-            model = apps.get_model('api', model_name)
+            model = apps.get_model('buildings', model_name)
             
             # Vérifier si le champ existe
             if not hasattr(model, group_by):
@@ -177,7 +177,7 @@ class AverageDistanceView(views.APIView):
             }, status=400)
         
         try:
-            model = apps.get_model('api', model_name)
+            model = apps.get_model('buildings', model_name)
             
             # Vérifier si le modèle a un champ géométrique
             if not hasattr(model, 'geom'):
@@ -185,49 +185,60 @@ class AverageDistanceView(views.APIView):
                     'error': f'Le modèle {model_name} n\'a pas de champ géométrique'
                 }, status=400)
             
-            # Récupérer les points avec géométrie valide
-            points = model.objects.filter(geom__isnull=False).exclude(geom__exact='')[:limit]
+            points = model.objects.filter(geom__isnull=False)[:limit]
             
+            print(f'Nombre de points récupérés: {points.count()}')
             if points.count() < 2:
                 return Response({
                     'error': 'Pas assez de points pour calculer une distance moyenne'
                 }, status=400)
             
             distances = []
-            
+            srid = None
+            # Déterminer le SRID courant (on suppose que tous les points ont le même)
+            for pt in points:
+                if pt.geom:
+                    srid = pt.geom.srid
+                    break
+            if srid is None:
+                return Response({'error': 'Impossible de déterminer le SRID des géométries'}, status=400)
             # Calculer les distances entre chaque paire de points
             for i, point1 in enumerate(points):
                 for point2 in points[i+1:]:
                     if point1.geom and point2.geom:
                         try:
-                            # Calculer la distance en mètres
-                            distance = point1.geom.distance(point2.geom)
+                            geom1 = point1.geom
+                            geom2 = point2.geom
+                            # Si SRID 4326, transformer en 32632 pour calculer en mètres
+                            if geom1.srid == 4326:
+                                geom1 = geom1.transform(32632, clone=True)
+                            if geom2.srid == 4326:
+                                geom2 = geom2.transform(32632, clone=True)
+                            distance = geom1.distance(geom2)
                             distances.append(distance)
-                        except:
+                        except Exception as e:
                             continue
-            
             if not distances:
                 return Response({
                     'error': 'Impossible de calculer les distances'
                 }, status=400)
-            
             # Calculer les statistiques avec le module statistics de Python
             avg_distance = statistics.mean(distances)
             min_distance = min(distances)
             max_distance = max(distances)
             median_distance = statistics.median(distances)
-            
             return Response({
                 'model': model_name,
                 'nombre_points_analysés': points.count(),
                 'nombre_paires': len(distances),
+                'distances': distances,
                 'distance_moyenne_metres': round(avg_distance, 2),
                 'distance_minimale_metres': round(min_distance, 2),
                 'distance_maximale_metres': round(max_distance, 2),
                 'distance_mediane_metres': round(median_distance, 2),
+                'srid_utilisé': srid,
                 'message': f'En moyenne, il faut parcourir {round(avg_distance, 2)} mètres pour trouver un autre {model_name}'
             })
-            
         except LookupError:
             return Response({
                 'error': f'Modèle {model_name} non trouvé'
