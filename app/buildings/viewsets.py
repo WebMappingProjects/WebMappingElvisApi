@@ -194,10 +194,10 @@ class ConseillerViewSet(viewsets.ModelViewSet):
 
 
 class RouteViewSet(BaseGISViewSet):
-    queryset = Route.objects.select_related('commune').all()
+    queryset = Route.objects.select_related('region').all()
     serializer_class = RouteSerializer
-    search_fields = ['nom', 'commune__nom']
-    filterset_fields = ['type', 'commune', 'commune__departement']
+    search_fields = ['nom', 'region__nom']
+    filterset_fields = ['type', 'region']
     ordering_fields = ['nom', 'longueur']
     ordering = ['nom']
     
@@ -212,10 +212,11 @@ class RouteViewSet(BaseGISViewSet):
 
 
 class HydrographieViewSet(BaseGISViewSet):
-    queryset = Hydrographie.objects.select_related('commune').all()
+    queryset = Hydrographie.objects.select_related('region').all()
     serializer_class = HydrographieSerializer
-    search_fields = ['nom', 'commune__nom']
-    filterset_fields = ['commune', 'commune__departement']
+    search_fields = ['nom', 'region__nom']
+    # filterset_fields = ['commune', 'commune__departement']
+    filterset_fields = ['region']
     ordering_fields = ['nom', 'longueur']
     ordering = ['nom']
 

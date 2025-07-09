@@ -70,22 +70,22 @@ class CommuneSerializer(GeoFeatureModelSerializer):
 
 # Infrastructure Serializers
 class RouteSerializer(GeoFeatureModelSerializer):
-    commune_nom = serializers.CharField(source='commune.nom', read_only=True)
+    region_nom = serializers.CharField(source='region.nom', read_only=True)
     type_display = serializers.CharField(source='get_type_display', read_only=True)
     
     class Meta:
         model = Route
         geo_field = 'geom'
-        fields = ['id', 'nom', 'longueur', 'type', 'type_display', 'commune', 'commune_nom']
+        fields = ['id', 'nom', 'longueur', 'type', 'type_display', 'region', 'region_nom']
 
 
 class HydrographieSerializer(GeoFeatureModelSerializer):
-    commune_nom = serializers.CharField(source='commune.nom', read_only=True)
+    region_nom = serializers.CharField(source='region.nom', read_only=True)
     
     class Meta:
         model = Hydrographie
         geo_field = 'geom'
-        fields = ['id', 'nom', 'longueur', 'commune', 'commune_nom']
+        fields = ['id', 'nom', 'longueur', 'region', 'region_nom']
 
 
 # Services Serializers

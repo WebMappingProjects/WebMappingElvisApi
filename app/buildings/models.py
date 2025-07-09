@@ -161,8 +161,10 @@ class Route(models.Model):
     nom = models.CharField(max_length=100)
     longueur = models.DecimalField(max_digits=15, decimal_places=2, validators=[MinValueValidator(0)])
     type = models.CharField(max_length=20, choices=TypeRoute.choices)
-    commune = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='routes')
-    
+    # commune = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='routes')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='routes')
+
+
     class Meta:
         verbose_name = "Route"
         verbose_name_plural = "Routes"
@@ -175,7 +177,8 @@ class Hydrographie(models.Model):
     geom = models.MultiLineStringField(srid=4326,blank=True, null=True)
     nom = models.CharField(max_length=100)
     longueur = models.DecimalField(max_digits=15, decimal_places=2, validators=[MinValueValidator(0)])
-    commune = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='hydrographies')
+    # commune = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='hydrographies')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='hydrographies')
     
     class Meta:
         verbose_name = "Hydrographie"
