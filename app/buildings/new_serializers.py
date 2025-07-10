@@ -57,7 +57,7 @@ class CommuneSerializer(GeoFeatureModelSerializer):
     
     def get_services_count(self, obj):
         return {
-            'routes': obj.routes.count(),
+            # 'routes': obj.routes.count(),
             'sante': obj.services_sante.count(),
             'enseignement': obj.etablissements_enseignement.count(),
             'eglises': obj.eglises.count(),
@@ -223,7 +223,7 @@ class DepartementDetailSerializer(GeoFeatureModelSerializer):
 
 class CommuneDetailSerializer(GeoFeatureModelSerializer):
     departement = DepartementSerializer(read_only=True)
-    routes = RouteSerializer(many=True, read_only=True)
+    #routes = RouteSerializer(many=True, read_only=True)
     services_sante = SanteSerializer(many=True, read_only=True)
     etablissements_enseignement = EnseignementSerializer(many=True, read_only=True)
     eglises = EgliseSerializer(many=True, read_only=True)
@@ -235,7 +235,7 @@ class CommuneDetailSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Commune
         geo_field = 'geom'
-        fields = ['id', 'nom', 'superficie', 'maire', 'departement', 'routes',
+        fields = ['id', 'nom', 'superficie', 'maire', 'departement',
                  'services_sante', 'etablissements_enseignement', 'eglises',
                  'services_securite', 'hebergements', 'services_publiques', 'projets']
 

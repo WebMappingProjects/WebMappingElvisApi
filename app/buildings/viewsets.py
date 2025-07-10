@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.gis.geos import Point, Polygon
+from django.apps import apps
 from django.contrib.gis.measure import D
 from django.db.models import Q, Count, Sum
 from buildings.models import (
@@ -150,11 +151,11 @@ class CommuneViewSet(BaseGISViewSet):
         """Get summary of all services in the commune"""
         commune = self.get_object()
         summary = {
-            'routes': {
-                'count': commune.routes.count(),
-                'total_longueur': commune.routes.aggregate(Sum('longueur'))['longueur__sum'] or 0,
-                'by_type': commune.routes.values('type').annotate(count=Count('id'))
-            },
+            # 'routes': {
+            #     'count': commune.routes.count(),
+            #     'total_longueur': commune.routes.aggregate(Sum('longueur'))['longueur__sum'] or 0,
+            #     'by_type': commune.routes.values('type').annotate(count=Count('id'))
+            # },
             'sante': {
                 'centres': commune.services_sante.filter(centresante__isnull=False).count(),
                 'pharmacies': commune.services_sante.filter(pharmacie__isnull=False).count()
@@ -415,7 +416,7 @@ class ProjetViewSet(viewsets.ModelViewSet):
 
 # Global API ViewSet for dashboard statistics
 class DashboardViewSet(viewsets.ViewSet):
-    permission_classes = [TechnicienOrReadOnly]
+    # permission_classes = [TechnicienOrReadOnly]
     
     @action(detail=False, methods=['get'])
     def global_statistics(self, request):
@@ -489,3 +490,181 @@ class DashboardViewSet(viewsets.ViewSet):
         # Add more search types as needed...
         
         return Response(results)
+
+    @action(detail=False, methods=['get'])
+    def group_by_admin(self, request):
+        """
+        Group data by administrative division (commune, departement, region)
+        """
+        model_name = request.query_params.get('model')
+        admin_level = request.query_params.get('admin_level')  # 'commune', 'departement' ou 'region'
+        count_field = request.query_params.get('count_field', 'id')  # Field to count
+        
+        if not model_name or not admin_level:
+            return Response({
+                'error': 'Required parameters: model and admin_level'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if admin_level not in ['commune', 'departement', 'region']:
+            return Response({
+                'error': 'admin_level must be: commune, departement or region'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            model = apps.get_model('buildings', model_name)
+            
+            # Check if model has relation with admin division
+            if not hasattr(model, admin_level):
+                return Response({
+                    'error': f'Model {model_name} has no relation with {admin_level}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Build relation field name
+            relation_field = f'{admin_level}__nom'
+            
+            # Perform grouping
+            results = model.objects.values(relation_field).annotate(
+                count=Count(count_field)
+            ).order_by('-count')
+            
+            # Calculate total
+            total = sum(item['count'] for item in results)
+            
+            return Response({
+                'model': model_name,
+                'grouped_by': admin_level,
+                'results': results,
+                'total': total
+            })
+            
+        except LookupError:
+            return Response({
+                'error': f'Model {model_name} not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+    
+    @action(detail=False, methods=['get'])
+    def distance_stats(self, request):
+        """
+        Calculate distance statistics between services grouped by admin division
+        """
+        model_name = request.query_params.get('model')
+        admin_level = request.query_params.get('admin_level', 'commune')
+        limit = int(request.query_params.get('limit', 100))
+        
+        if not model_name:
+            return Response({
+                'error': 'Required parameter: model'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            model = apps.get_model('buildings', model_name)
+            
+            # Validations
+            if not hasattr(model, 'geom'):
+                return Response({
+                    'error': f'Model {model_name} has no geometry field'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            if not hasattr(model, admin_level):
+                return Response({
+                    'error': f'Model {model_name} has no relation with {admin_level}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Get admin divisions with at least 2 points
+            admin_divisions = (
+                model.objects
+                .filter(geom__isnull=False)
+                .values(admin_level)
+                .annotate(count=Count('id'))
+                .filter(count__gt=1)
+                .order_by('-count')[:limit]
+            )
+            
+            results = []
+            
+            for division in admin_divisions:
+                division_id = division[admin_level]
+                points = model.objects.filter(
+                    **{admin_level: division_id},
+                    geom__isnull=False
+                )
+                
+                # Calculate distance stats for this division
+                stats = self._calculate_distance_stats(points)
+                
+                # Get division name
+                division_name = self._get_division_name(admin_level, division_id)
+                
+                results.append({
+                    'division_id': division_id,
+                    'division_name': division_name,
+                    'count': division['count'],
+                    **stats
+                })
+            
+            return Response({
+                'model': model_name,
+                'admin_level': admin_level,
+                'results': results
+            })
+            
+        except LookupError:
+            return Response({
+                'error': f'Model {model_name} not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'error': f'Calculation error: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def _calculate_distance_stats(self, points):
+        """Calculate distance statistics for a list of points"""
+        distances = []
+        srid = None
+        
+        # Determine current SRID
+        for pt in points:
+            if pt.geom:
+                srid = pt.geom.srid
+                break
+        
+        if srid is None:
+            return {'error': 'Cannot determine SRID'}
+        
+        # Calculate distances between each pair
+        for i, point1 in enumerate(points):
+            for point2 in points[i+1:]:
+                if point1.geom and point2.geom:
+                    try:
+                        geom1 = point1.geom
+                        geom2 = point2.geom
+                        if geom1.srid == 4326:
+                            geom1 = geom1.transform(32632, clone=True)
+                        if geom2.srid == 4326:
+                            geom2 = geom2.transform(32632, clone=True)
+                        distance = geom1.distance(geom2)
+                        distances.append(distance)
+                    except Exception:
+                        continue
+        
+        if not distances:
+            return {'error': 'No calculable distances'}
+        
+        return {
+            'avg_distance_meters': round(statistics.mean(distances), 2),
+            'min_distance_meters': round(min(distances), 2),
+            'max_distance_meters': round(max(distances), 2),
+            'median_distance_meters': round(statistics.median(distances), 2),
+            'pairs_count': len(distances),
+            'srid_used': srid
+        }
+    
+    def _get_division_name(self, admin_level, division_id):
+        """Get administrative division name"""
+        if admin_level == 'commune':
+            return Commune.objects.get(id=division_id).nom
+        elif admin_level == 'departement':
+            return Departement.objects.get(id=division_id).nom
+        elif admin_level == 'region':
+            return Region.objects.get(id=division_id).nom
+        return 'Unknown'
