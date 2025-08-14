@@ -9,12 +9,13 @@ router = routers.DefaultRouter()
 
 router.register(r'users', UserViewSet, basename='users')
 router.register(r'admins', AdminViewSet, basename='admins')
+router.register(r'', TokenViewSet, basename='refresh')
 
 
 urlpatterns = router.urls
 
 urlpatterns += [
-    path('login/',LoginView.as_view(), name='token_obtain_pair'),
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('login/', LoginView.as_view(), name='token_obtain_pair'),
+    # path('refresh/', TokenViewSet.as_view(), name='refresh'),
     path('register/', RegisterView.as_view(), name='register'),
 ]

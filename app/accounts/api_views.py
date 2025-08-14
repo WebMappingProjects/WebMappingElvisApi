@@ -9,6 +9,8 @@ from accounts.permissions import *
 from rest_framework import filters
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
 
 class LoginView(TokenObtainPairView):
@@ -91,3 +93,23 @@ class AdminViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["username", "email"]
     ordering_fields = ["username", "email"]
+
+
+# class TokenRefreshView(TokenRefreshView):
+#     """
+#     API View pour rafraîchir un token JWT.
+#     Attend un refresh token dans le corps de la requête et retourne un nouveau access token.
+#     """
+#     permission_classes = [permissions.AllowAny]
+
+
+class TokenViewSet(viewsets.ViewSet):
+    """ViewSet exposant une action pour rafraichir le token JWT."""
+    permission_classes = [permissions.AllowAny]
+
+    @action(detail=False, methods=['post'], url_path='refresh')
+    def refresh(self, request):
+        serializer = TokenRefreshSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+

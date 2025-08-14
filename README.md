@@ -12,7 +12,7 @@ API django avec django rest framework qui utilise **postgresql** comme sgbd et q
 
 ## Installation
 
-### 1. Cloner le Répertoire
+### 1. Cloner le Répertoire 
 
 ```bash
 git clone https://github.com/WebMappingProjects/WebMappingElvisApi.git
