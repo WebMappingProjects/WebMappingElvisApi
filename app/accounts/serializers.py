@@ -62,4 +62,11 @@ class AdminSerializer(UserSerializer):
     def create(self, validated_data, *args, **kwargs):
         user = self.Meta.model.objects.create_superuser(**validated_data)
         return user
+
+
+class StoredRefreshTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = __import__('accounts.models', fromlist=['StoredRefreshToken']).StoredRefreshToken
+        fields = ['id', 'user', 'jti', 'ip_address', 'user_agent', 'created_at', 'expires_at', 'revoked']
+        read_only_fields = ['created_at']
     
