@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
-from django.utils import timezone
+from django.utils import timezone as tz
 from threading import Thread
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
@@ -447,7 +447,7 @@ class TokenViewSet(viewsets.ViewSet):
             response.delete_cookie('authenticated')
             return response
 
-        if stored.expires_at and stored.expires_at < timezone.now():
+        if stored.expires_at and stored.expires_at < tz.now():
             response = Response({'detail': 'Refresh token expiré.'}, status=status.HTTP_401_UNAUTHORIZED)
             # Delete cookies if token is expired
             response.delete_cookie('refresh_token')
