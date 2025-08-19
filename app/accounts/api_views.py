@@ -123,7 +123,7 @@ class LoginView(TokenObtainPairView):
         # Remove all revoked refresh tokens for this user
         if user:
             # Supprimer tous les tokens dont la date d'expiration est déjà dépassée
-            StoredRefreshToken.objects.filter(expires_at__lt=timezone.now()).delete()
+            StoredRefreshToken.objects.filter(expires_at__lt=tz.now()).delete()
 
         if refresh_token:
             try:
