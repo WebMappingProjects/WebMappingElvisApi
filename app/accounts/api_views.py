@@ -384,13 +384,42 @@ class UserViewSet(viewsets.ModelViewSet):
 
         user = request.user
         if not user.check_password(old_password):
-            return Response({"error": "Ancien mot de passe incorrect"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Mot de passe incorrect"}, status=status.HTTP_400_BAD_REQUEST)
 
         user.set_password(new_password)
         user.save()
 
         return Response({"success": True, "message": "Mot de passe changé avec succès"})
 
+    @action(detail=True, methods=['DELETE'], url_path='delete-account', permission_classes=[permissions.IsAuthenticated])
+    def delete_account(self, request, pk=None):
+        """Permet à un utilisateur de supprimer son compte"""
+        user = self.get_object()
+        
+        # Vérifier que l'utilisateur supprime son propre compte ou est admin
+        if request.user != user and not request.user.is_superuser:
+            return Response(
+                {'error': 'Vous ne pouvez pas supprimer le compte d\'un autre utilisateur'}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        # Supprimer les refresh tokens
+        StoredRefreshToken.objects.filter(user=user).delete()
+        
+        # Supprimer l'utilisateur
+        user.delete()
+        
+        response = Response(
+            {'message': 'Compte supprimé avec succès'}, 
+            status=status.HTTP_200_OK
+        )
+        
+        # Supprimer les cookies si l'utilisateur supprime son propre compte
+        if request.user == user:
+            response.delete_cookie('refresh_token')
+            response.delete_cookie('authenticated')
+        
+        return response
 
 class AdminViewSet(viewsets.ModelViewSet):
     model = User
