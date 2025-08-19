@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'buildings',
     'accounts',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'drf_yasg',
 
    
@@ -180,7 +181,7 @@ REST_FRAMEWORK = {
 
 # JWT settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15), #timedelta(days=14),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), #timedelta(days=14),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -273,12 +274,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:3000',
-
-
-]
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1:3000',
+#     'http://localhost:5173',
+# ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -287,7 +287,7 @@ GEOIP_PATH = os.path.join(BASE_DIR,'geoip')
 
 CORS_ALLOW_CREDENTIALS = True
 
-
+COSR_EXPOSE_HEADERS = ['Set-Cookie']
 
 LEAFLET_CONFIG = {
     "DEFAULT_CENTER": (51.505, -0.09),

@@ -137,7 +137,7 @@ class DepartementViewSet(BaseGISViewSet):
 class CommuneViewSet(BaseGISViewSet):
     queryset = Commune.objects.select_related('departement__region').all()
     serializer_class = CommuneSerializer
-    search_fields = ['nom', 'maire', 'departement__nom']
+    search_fields = ['nom', 'maire', 'departement__nom', 'departement__region__nom']
     filterset_fields = ['departement', 'departement__region']
     ordering_fields = ['nom', 'superficie']
     ordering = ['nom']
@@ -235,7 +235,7 @@ class SanteViewSet(BaseGISViewSet):
 class CentreSanteViewSet(BaseGISViewSet):
     queryset = CentreSante.objects.select_related('commune').all()
     serializer_class = CentreSanteSerializer
-    search_fields = ['nom', 'commune__nom']
+    search_fields = ['nom', 'commune__nom', 'type', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'commune', 'commune__departement']
     ordering_fields = ['nom']
     ordering = ['nom']
@@ -259,7 +259,7 @@ class PharmacieViewSet(BaseGISViewSet):
 class EnseignementViewSet(BaseGISViewSet):
     queryset = Enseignement.objects.select_related('commune').all()
     serializer_class = EnseignementSerializer
-    search_fields = ['nom', 'nom_responsable', 'commune__nom']
+    search_fields = ['nom', 'nom_responsable', 'commune__nom', 'religion', 'enseignement', 'meilleur_diplome', 'formation', 'type', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'religion', 'enseignement', 'formation', 'commune']
     ordering_fields = ['nom', 'effectif']
     ordering = ['nom']
@@ -285,7 +285,7 @@ class EnseignementViewSet(BaseGISViewSet):
 class EgliseViewSet(BaseGISViewSet):
     queryset = Eglise.objects.select_related('commune').all()
     serializer_class = EgliseSerializer
-    search_fields = ['nom', 'commune__nom']
+    search_fields = ['nom', 'commune__nom', 'type', 'structure', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'structure', 'commune', 'commune__departement']
     ordering_fields = ['nom', 'capacite']
     ordering = ['nom']
@@ -307,7 +307,7 @@ class EgliseViewSet(BaseGISViewSet):
 class SecuriteViewSet(BaseGISViewSet):
     queryset = Securite.objects.select_related('commune').all()
     serializer_class = SecuriteSerializer
-    search_fields = ['nom', 'commune__nom']
+    search_fields = ['nom', 'commune__nom', 'type', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'commune', 'commune__departement']
     ordering_fields = ['nom', 'nombre_agent']
     ordering = ['nom']
@@ -328,7 +328,7 @@ class SecuriteViewSet(BaseGISViewSet):
 class HebergementViewSet(BaseGISViewSet):
     queryset = Hebergement.objects.select_related('commune').all()
     serializer_class = HebergementSerializer
-    search_fields = ['nom', 'standing', 'commune__nom']
+    search_fields = ['nom', 'standing', 'commune__nom', 'type', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'commune', 'commune__departement']
     ordering_fields = ['nom', 'nb_chambres']
     ordering = ['nom']
@@ -350,7 +350,7 @@ class HebergementViewSet(BaseGISViewSet):
 class ServicePubliqueViewSet(BaseGISViewSet):
     queryset = ServicePublique.objects.select_related('commune').all()
     serializer_class = ServicePubliqueSerializer
-    search_fields = ['nom', 'commune__nom']
+    search_fields = ['nom', 'commune__nom', 'type', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['type', 'commune', 'commune__departement']
     ordering_fields = ['nom']
     ordering = ['nom']
@@ -367,7 +367,7 @@ class ProjetViewSet(viewsets.ModelViewSet):
     serializer_class = ProjetSerializer
     permission_classes = [TechnicienOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['nom_contractant', 'description', 'commune__nom']
+    search_fields = ['nom_contractant', 'description', 'commune__nom', 'type', 'service', 'commune__departement__nom', 'commune__departement__region__nom']
     filterset_fields = ['service', 'commune', 'commune__departement']
     ordering_fields = ['date_debut', 'date_livraison', 'montant']
     ordering = ['-date_debut']

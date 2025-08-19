@@ -48,10 +48,12 @@ class TypeEtablissement(models.TextChoices):
 
 
 class TypeCentre(models.TextChoices):
+    CENTRE_SANTE = 'centre_sante', 'Centre de Santé'
     CLINIQUE = 'clinique', 'Clinique'
     HOPITAL_ARRONDISSEMENT = 'hopital_arrondissement', 'Hôpital d\'Arrondissement'
     HOPITAL_REGIONAL = 'hopital_regional', 'Hôpital Régional'
     HOPITAL_DISTRICT = 'hopital_district', 'Hôpital de District'
+    PHARMACIE = 'pharmacie', 'Pharmacie'
 
 
 class TypeSecurite(models.TextChoices):

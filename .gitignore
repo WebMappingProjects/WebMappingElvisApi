@@ -3,3 +3,4 @@ app/*/migrations/*
 app/*/__pycache__/*
 app/static/*
 app/files/*
+check_syntax.py

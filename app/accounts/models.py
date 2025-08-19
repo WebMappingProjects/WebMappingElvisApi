@@ -17,6 +17,9 @@ class User(AbstractUser):
         verbose_name='Rôle'
     )
     
+    code = models.CharField(null=True, blank=True)
+    code_expires_at = models.DateTimeField(null=True, blank=True)
+    
     class Meta:
         verbose_name = 'Utilisateur'
         verbose_name_plural = 'Utilisateurs'

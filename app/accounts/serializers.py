@@ -1,11 +1,19 @@
 from accounts.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-
+from rest_framework import serializers as _serializers
 
 
 class LoginSerializer(TokenObtainPairSerializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # expose an 'identifier' field that can be username or email
+        self.fields['identifier'] = _serializers.CharField(required=False, write_only=True)
+        # make the configured username field optional so clients can send 'identifier' instead
+        username_field = self.username_field if hasattr(self, 'username_field') else 'username'
+        if username_field in self.fields:
+            self.fields[username_field].required = False
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
@@ -18,13 +26,34 @@ class LoginSerializer(TokenObtainPairSerializer):
     
 
     def validate(self, attrs):
+        # Accept an 'identifier' field which can be either the username or the email.
+        # If provided, try to resolve it to the actual username and inject it into attrs
+        # so the parent TokenObtainPairSerializer can authenticate normally.
+        username_field = self.username_field if hasattr(self, 'username_field') else 'username'
+
+        if not attrs.get(username_field):
+            identifier = attrs.get('identifier') or attrs.get('email')
+            if identifier:
+                try:
+                    # prefer exact username match, then email
+                    user = (
+                        User.objects.filter(username__iexact=identifier).first()
+                        or User.objects.filter(email__iexact=identifier).first()
+                    )
+                    if user:
+                        attrs[username_field] = user.get_username()
+                except Exception:
+                    # fallback: leave attrs unchanged and let parent raise
+                    pass
+
+        # Call parent validation (this performs the actual authentication)
         data = super().validate(attrs)
 
         # Add extra response data
-        data['email'] = self.user.email
-        data['user_id'] = self.user.id
-        data['username'] = self.user.username
-
+        # data['email'] = getattr(self.user, 'email', None)
+        # data['user_id'] = getattr(self.user, 'id', None)
+        # data['username'] = getattr(self.user, 'username', None)
+        data['user'] = UserSerializer(self.user).data
 
         return data
 
