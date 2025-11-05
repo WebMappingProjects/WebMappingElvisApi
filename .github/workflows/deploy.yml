@@ -68,12 +68,12 @@ jobs:
 
       - name: Set proper permissions on VPS
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
-            cd ${{ secrets.VPS_PATH }} &&
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} '
+            cd "${{ secrets.VPS_PATH }}" &&
             find . -type f -exec chmod 644 {} \; &&
             find . -type d -exec chmod 755 {} \; &&
-            chmod +x *.sh 2>/dev/null || true
-          "
+            find . -name "*.sh" -type f -exec chmod +x {} \;
+          '
 
       - name: Deploy with Docker Compose
         run: |
