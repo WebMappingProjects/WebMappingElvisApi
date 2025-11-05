@@ -156,7 +156,7 @@ class LoginView(TokenObtainPairView):
             refresh_token,
             httponly=True,
             secure=True,
-            samesite='Lax',
+            samesite='None', # Lax
             max_age=14 * 24 * 60 * 60,  # 14 jours
             path='/'
         )
@@ -165,7 +165,7 @@ class LoginView(TokenObtainPairView):
             'true',
             httponly=False,
             secure=True,
-            samesite='Lax',
+            samesite='None', # Lax
             max_age=14 * 24 * 60 * 60  # 14 jours
         )
         # Remove refresh token from response data
@@ -225,7 +225,7 @@ class RegisterView(generics.CreateAPIView):
                 str(refresh),
                 httponly=True,
                 secure=True,
-                samesite='Lax',
+                samesite='None', # Lax
                 max_age=14 * 24 * 60 * 60  # 14 jours
             )
             response.set_cookie(
@@ -233,7 +233,7 @@ class RegisterView(generics.CreateAPIView):
                 'true',
                 httponly=False,
                 secure=True,
-                samesite='Lax',
+                samesite='None', # Lax
                 max_age=14 * 24 * 60 * 60  # 14 jours
             )
 
@@ -520,7 +520,7 @@ class TokenViewSet(viewsets.ViewSet):
                 new_refresh,
                 httponly=True,
                 secure=True,
-                samesite='Lax',
+                samesite='None', # Lax
                 max_age=14 * 24 * 60 * 60,
                 path='/'
             )
@@ -529,7 +529,7 @@ class TokenViewSet(viewsets.ViewSet):
                 'true',
                 httponly=False,
                 secure=True,
-                samesite='Lax',
+                samesite='None', # Lax
                 max_age=14 * 24 * 60 * 60,
             )
 
