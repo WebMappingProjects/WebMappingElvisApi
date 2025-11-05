@@ -1,0 +1,83 @@
+name: Deploy MA KARTE API
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create .env locally
+        run: |
+          echo "NODE_ENV=production" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env
+          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env
+
+      - name: Create database.env locally
+        run: |
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> database.env
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> database.env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> database.env
+          echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}" >> database.env
+
+      - name: Ensure target directory exists on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+            mkdir -p ${{ secrets.VPS_PATH }}
+          "
+    
+      - name: Copy env files to VPS
+        run: |
+          scp -o StrictHostKeyChecking=no .env ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/.env
+          scp -o StrictHostKeyChecking=no database.env ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/database.env
+
+      - name: Clean and prepare files for transfer
+        run: |
+          # Nettoyer les fichiers potentiellement problématiques
+          find . -name "*.pyc" -delete
+          find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+          find . -name ".DS_Store" -delete
+
+      - name: Copy project to VPS with improved rsync
+        run: |
+          rsync -avz --no-perms --no-owner --no-group \
+            --exclude '.git' \
+            --exclude 'node_modules' \
+            --exclude '.env*' \
+            --exclude '__pycache__' \
+            --exclude '*.pyc' \
+            --exclude '.DS_Store' \
+            --exclude '*.sqlite3' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH}}/
+
+      - name: Set proper permissions on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+            cd ${{ secrets.VPS_PATH }} &&
+            find . -type f -exec chmod 644 {} \; &&
+            find . -type d -exec chmod 755 {} \; &&
+            chmod +x *.sh 2>/dev/null || true
+
+      - name: Deploy with Docker Compose
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+            cd ${{ secrets.VPS_PATH }} &&
+            docker compose down &&
+            docker compose up -d --build
+          "
